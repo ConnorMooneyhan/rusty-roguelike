@@ -4,7 +4,7 @@
 A dungeon crawler with procedurally-generated levels, monsters of increasing difficulty, and turn-based movement.
 
 ## Story
-Beneath the stormy sky of Gerlingtown lurks a strange and ominous horde of monsters. Silently they grow, amassing their army, lying in wait until the perfect time to strike. Nothing can stop them except the legendary Amulet of Paxus, which is said to be hidden deep within a long-abandoned dungeon -- the very same dungeon that the monsters have made their dwelling. Our hero, Aliana, must face this great danger in order to give her people a chance to survive. For the sake of Gerlingtown, she must make it out alive...
+Beneath the stormy sky of Gerlingtown lurks a strange and ominous horde. Silently they grow, amassing their army, lying in wait until the perfect time to strike. Nothing can stop them except the legendary Amulet of Paxus, which is said to be hidden deep within a long-abandoned dungeon -- the very same dungeon that the monsters have made their dwelling. Our hero, Aliana, must face this great danger in order to give her people a chance to survive. For the sake of Gerlingtown, she must make it out alive...
 
 ## Basic Game Loops
 1. Enter dungeon level.
