@@ -11,6 +11,23 @@ mod prelude {
 
 use prelude::*;
 
-fn main() {
-    println!("Hello there, adventurer!");
+struct State {
+    map: Map
 }
+
+impl State {
+    fn new() -> Self {
+        Self {
+            map: Map::new()
+        }
+    }
+}
+
+impl GameState for State {
+    fn tick(&mut self, ctx: &mut BTerm) {
+        ctx.cls();
+        self.map.render(ctx);
+    }
+}
+
+fn main() {}
