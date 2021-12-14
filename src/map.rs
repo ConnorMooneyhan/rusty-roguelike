@@ -56,4 +56,22 @@ impl Map {
             }
         }
     }
+
+    /// Detects if point is in bounds
+    pub fn in_bounds(&self, point: Point) -> bool {
+        point.x >= 0 && point.x < SCREEN_WIDTH && point.y >= 0 && point.y < SCREEN_HEIGHT
+    }
+
+    /// Determines if a player can enter a given tile
+    pub fn can_enter_tile(&self, point: Point) -> bool {
+        self.in_bounds(point) && self.tiles[map_idx(point.x, point.y)] == TileType::Floor
+    }
+
+    pub fn try_idx(&self, point: Point) -> Option<usize> {
+        if self.in_bounds(point) {
+            Some(map_idx(point.x, point.y))
+        } else {
+            None
+        }
+    }
 }
