@@ -39,8 +39,11 @@ impl State {
 
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
+        ctx.set_active_console(0);
         ctx.cls();
-
+        ctx.set_active_console(1);
+        ctx.cls();
+        
         // Updates
         self.player.update(ctx, &self.map, &mut self.camera);
         
