@@ -1,4 +1,4 @@
-use bracket_lib::prelude::{BTerm, to_cp437};
+use bracket_lib::prelude::{to_cp437, BTerm};
 
 use crate::prelude::*;
 const NUM_TILES: usize = (SCREEN_WIDTH * SCREEN_HEIGHT) as usize;
@@ -6,7 +6,7 @@ const NUM_TILES: usize = (SCREEN_WIDTH * SCREEN_HEIGHT) as usize;
 #[derive(Copy, Clone, PartialEq)]
 pub enum TileType {
     Wall,
-    Floor
+    Floor,
 }
 
 /// Calculates index in Map.tiles for a given x and y\
@@ -16,14 +16,14 @@ pub fn map_idx(x: i32, y: i32) -> usize {
 }
 
 pub struct Map {
-    pub tiles: Vec<TileType>
+    pub tiles: Vec<TileType>,
 }
 
 impl Map {
     /// Constructs new Map instance populated with floor tiles.
     pub fn new() -> Self {
         Self {
-            tiles: vec![TileType::Floor; NUM_TILES]
+            tiles: vec![TileType::Floor; NUM_TILES],
         }
     }
 
@@ -43,16 +43,16 @@ impl Map {
                                 y - camera.top_y,
                                 WHITE,
                                 BLACK,
-                                to_cp437('.')
+                                to_cp437('.'),
                             );
-                        },
+                        }
                         TileType::Wall => {
                             ctx.set(
                                 x - camera.left_x,
                                 y - camera.top_y,
                                 WHITE,
                                 BLACK,
-                                to_cp437('#')
+                                to_cp437('#'),
                             );
                         }
                     }
