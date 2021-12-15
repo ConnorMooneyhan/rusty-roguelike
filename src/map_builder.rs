@@ -9,13 +9,18 @@ pub struct MapBuilder {
 }
 
 impl MapBuilder {
-    /// Constructs new `MapBuilder` for given `Map` and `player_start` with empty `rooms` vector    
-    fn new(map: Map, player_start: Point) -> Self {
-        Self {
-            map,
+    /// Constructs new `MapBuilder` for given `RandomNumberGenerator` instance  
+    pub fn new(rng: &mut RandomNumberGenerator) -> Self {
+        let mut mb = Self {
+            map: Map::new(),
             rooms: Vec::new(),
-            player_start
-        }
+            player_start: Point::zero(),
+        };
+        mb.fill(TileType::Wall);
+        mb.build_random_rooms(rng);
+        mb.build_corridors(rng);
+        mb.player_start = mb.rooms[0].center();
+        mb
     }
 
     /// Fills entire dungeon with tiles of type `tile`
