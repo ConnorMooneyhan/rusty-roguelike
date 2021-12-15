@@ -27,37 +27,41 @@ impl Map {
         }
     }
 
-    /// Loops through Map.tiles to render '.' for floor tiles and '#' for wall tiles.
-    pub fn render(&self, ctx: &mut BTerm) {
+    /// Loops through Map.tiles to render '.' for floor tiles and '#' for wall tiles.\
+    /// Renders with map centered on player.
+    pub fn render(&self, ctx: &mut BTerm, camera: &Camera) {
+        ctx.set_active_console(0);
         // Looping y-first is most performant with row-first striding
-        for y in 0..SCREEN_HEIGHT {
-            for x in 0..SCREEN_WIDTH {
-                let idx = map_idx(x, y);
-                match self.tiles[idx] {
-                    TileType::Floor => {
-                        ctx.set(
-                            x,
-                            y,
-                            YELLOW,
-                            BLACK,
-                            to_cp437('.')
-                        );
-                    },
-                    TileType::Wall => {
-                        ctx.set(
-                            x,
-                            y,
-                            GREEN,
-                            BLACK,
-                            to_cp437('#')
-                        );
+        for y in camera.top_y..camera.bottom_y {
+            for x in camera.left_x..camera.right_x {
+                if self.in_bounds(Point::new(x, y)) {
+                    let idx = map_idx(x, y);
+                    match self.tiles[idx] {
+                        TileType::Floor => {
+                            ctx.set(
+                                x - camera.left_x,
+                                y - camera.top_y,
+                                WHITE,
+                                BLACK,
+                                to_cp437('.')
+                            );
+                        },
+                        TileType::Wall => {
+                            ctx.set(
+                                x - camera.left_x,
+                                y - camera.top_y,
+                                WHITE,
+                                BLACK,
+                                to_cp437('#')
+                            );
+                        }
                     }
                 }
             }
         }
     }
 
-    /// Detects if point is in bounds
+    /// Detects if point is in bounds of screen
     pub fn in_bounds(&self, point: Point) -> bool {
         point.x >= 0 && point.x < SCREEN_WIDTH && point.y >= 0 && point.y < SCREEN_HEIGHT
     }
