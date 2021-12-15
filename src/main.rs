@@ -54,14 +54,14 @@ impl GameState for State {
 }
 
 fn main() -> BError {
-    let context = BTermBuilder::simple80x50()
+    let context = BTermBuilder::new()
         .with_title("Rusty Roguelike")
         .with_fps_cap(30.0) // Throttles fps to specified
         .with_dimensions(DISPLAY_WIDTH, DISPLAY_HEIGHT) // Dimensions of window displayed
         .with_tile_dimensions(32, 32) // How big is a character?
         .with_resource_path("resources/") // Where are my resources coming from?
-        .with_font("dungeon-font.png", 32, 32) // Which resource file is my font?
-        .with_simple_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeon-font.png") // Map layer
+        .with_font("dungeonfont.png", 32, 32) // Which resource file is my font?
+        .with_simple_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png") // Map layer
         .with_simple_console_no_bg(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png") // Player layer -- transparent
         .build()?;
 
