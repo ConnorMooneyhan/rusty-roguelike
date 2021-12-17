@@ -51,12 +51,15 @@ impl State {
 
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
+        // Clear console layers
         ctx.set_active_console(0);
         ctx.cls();
         ctx.set_active_console(1);
         ctx.cls();
 
-        // TODO: Execute Systems
+        // Execute systems
+        self.resources.insert(ctx.key);
+        self.systems.execute(&mut self.ecs, &mut self.resources);
 
         // TODO: Render Draw Buffer
     }
