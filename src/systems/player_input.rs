@@ -1,10 +1,10 @@
 use crate::prelude::*;
 
+/// Determines delta based on player input and, 
+/// if valid, moves players and camera to new location
 #[system]
 #[write_component(Point)]
 #[read_component(Player)]
-/// Determines delta based on player input and, 
-/// if valid, moves players and camera to new location
 pub fn player_input(
     ecs: &mut SubWorld,
     #[resource] map: &Map,
