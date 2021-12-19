@@ -1,13 +1,13 @@
 use crate::prelude::*;
 
-mod player_input;
-mod map_render;
-mod entity_render;
 mod collisions;
-mod random_move;
 mod end_turn;
+mod entity_render;
+mod map_render;
+mod player_input;
+mod random_move;
 
-/// Scheduler for TurnState::AwaitingInput 
+/// Scheduler for TurnState::AwaitingInput
 pub fn build_input_scheduler() -> Schedule {
     Schedule::builder()
         .add_system(player_input::player_input_system())
