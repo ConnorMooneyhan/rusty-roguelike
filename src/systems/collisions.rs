@@ -1,14 +1,16 @@
 use crate::prelude::*;
 
+/// Removes any enemies occupying player-occupied square
 #[system]
 #[read_component(Point)]
 #[read_component(Player)]
 #[read_component(Enemy)]
 pub fn collisions(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
     let mut player_pos = Point::zero();
-    let mut players = <&Point>::query()
-        .filter(component::<Player>());
-    players.iter(ecs).for_each(|pos| player_pos = *pos);
+    <&Point>::query()
+        .filter(component::<Player>())
+        .iter(ecs)
+        .for_each(|pos| player_pos = *pos);
 
     let mut enemies = <(Entity, &Point)>::query()
         .filter(component::<Enemy>());
