@@ -5,6 +5,7 @@ mod map_render;
 mod entity_render;
 mod collisions;
 mod random_move;
+mod end_turn;
 
 /// Builds Legion schedule from systems
 pub fn build_scheduler() -> Schedule {
