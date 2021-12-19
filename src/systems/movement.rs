@@ -16,9 +16,11 @@ pub fn movement(
         commands.add_component(want_move.entity, want_move.destination);
 
         // Center camera if entity that moved is Player
-        if ecs.entry_ref(want_move.entity)
+        if ecs
+            .entry_ref(want_move.entity)
             .unwrap()
-            .get_component::<Player>().is_ok()
+            .get_component::<Player>()
+            .is_ok()
         {
             camera.on_player_move(want_move.destination);
         }

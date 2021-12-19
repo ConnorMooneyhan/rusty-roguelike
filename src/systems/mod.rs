@@ -4,9 +4,9 @@ mod collisions;
 mod end_turn;
 mod entity_render;
 mod map_render;
+mod movement;
 mod player_input;
 mod random_move;
-mod movement;
 
 /// Scheduler for TurnState::AwaitingInput
 pub fn build_input_scheduler() -> Schedule {

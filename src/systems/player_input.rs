@@ -3,15 +3,15 @@ use crate::prelude::*;
 /// Determines delta based on player input and,
 /// if valid, moves players and camera to new location
 #[system]
-#[write_component(Point)]
+#[read_component(Point)]
 #[read_component(Player)]
 pub fn player_input(
     ecs: &mut SubWorld,
-    #[resource] map: &Map,
+    commands: &mut CommandBuffer,
     #[resource] key: &Option<VirtualKeyCode>,
-    #[resource] camera: &mut Camera,
     #[resource] turn_state: &mut TurnState,
 ) {
+    let mut players = <(Entity, &Point)>::query().filter(component::<Player>());
     if let Some(key) = key {
         let delta = match key {
             VirtualKeyCode::Up => Point::new(0, -1),
@@ -22,17 +22,17 @@ pub fn player_input(
         };
 
         if delta != Point::zero() {
-            <&mut Point>::query()
-                .filter(component::<Player>())
-                .iter_mut(ecs)
-                .for_each(|pos| {
-                    let destination = *pos + delta;
-                    if map.can_enter_tile(destination) {
-                        *pos = destination;
-                        camera.on_player_move(destination);
-                        *turn_state = TurnState::PlayerTurn;
-                    }
-                });
+            players.iter(ecs).for_each(|(entity, pos)| {
+                let destination = *pos + delta;
+                commands.push((
+                    (),
+                    WantsToMove {
+                        entity: *entity,
+                        destination,
+                    },
+                ));
+            });
+            *turn_state = TurnState::PlayerTurn;
         }
     }
 }
