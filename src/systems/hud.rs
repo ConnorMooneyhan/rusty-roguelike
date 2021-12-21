@@ -18,16 +18,15 @@ pub fn hud(ecs: &SubWorld) {
         SCREEN_WIDTH * 2,
         player_health.current,
         player_health.max,
-        ColorPair::new(RED, BLACK)
+        ColorPair::new(RED, BLACK),
     );
     draw_batch.print_color_centered(
         0,
         format!(
             " Health: {} / {} ",
-            player_health.current,
-            player_health.max,
+            player_health.current, player_health.max,
         ),
-        ColorPair::new(WHITE, RED)
+        ColorPair::new(WHITE, RED),
     );
     draw_batch.submit(10000).expect("Batch error");
 }
