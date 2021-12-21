@@ -64,13 +64,15 @@ impl State {
 
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
-        // Clear console layers
+        // Clears console layers
         ctx.set_active_console(0);
         ctx.cls();
         ctx.set_active_console(1);
         ctx.cls();
+        ctx.set_active_console(2);
+        ctx.cls();
 
-        // Execute systems
+        // Executes systems
         self.resources.insert(ctx.key);
         let current_state = self.resources.get::<TurnState>().unwrap().clone();
         match current_state {
@@ -95,9 +97,11 @@ fn main() -> BError {
         .with_dimensions(DISPLAY_WIDTH, DISPLAY_HEIGHT) // Dimensions of window displayed
         .with_tile_dimensions(32, 32) // How big is a character?
         .with_resource_path("resources/") // Where are my resources coming from?
-        .with_font("dungeonfont.png", 32, 32) // Which resource file is my font?
+        .with_font("dungeonfont.png", 32, 32) // Which resource file has my graphical font?
+        .with_font("terminal8x8.png", 32, 32) // Which resource file has my text font?
         .with_simple_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png") // Map layer
         .with_simple_console_no_bg(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png") // Player layer -- transparent
+        .with_simple_console_no_bg(SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, "terminal8x8.png") // HUD layer
         .build()?;
 
     main_loop(context, State::new())
