@@ -98,7 +98,7 @@ fn main() -> BError {
         .with_tile_dimensions(32, 32) // How big is a character?
         .with_resource_path("resources/") // Where are my resources coming from?
         .with_font("dungeonfont.png", 32, 32) // Which resource file has my graphical font?
-        .with_font("terminal8x8.png", 32, 32) // Which resource file has my text font?
+        .with_font("terminal8x8.png", 8, 8) // Which resource file has my text font?
         .with_simple_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png") // Map layer
         .with_simple_console_no_bg(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png") // Player layer -- transparent
         .with_simple_console_no_bg(SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, "terminal8x8.png") // HUD layer
