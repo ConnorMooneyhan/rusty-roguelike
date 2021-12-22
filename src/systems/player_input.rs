@@ -31,25 +31,29 @@ pub fn player_input(
             let mut hit_something = false;
             enemies
                 .iter(ecs)
-                .filter(|(_, pos)| {
-                    **pos == destination
-                })
+                .filter(|(_, pos)| **pos == destination)
                 .for_each(|(entity, _)| {
                     hit_something = true;
-                    commands.push(((), WantsToAttack {
-                        attacker: player_entity,
-                        victim: *entity,
-                    }));
+                    commands.push((
+                        (),
+                        WantsToAttack {
+                            attacker: player_entity,
+                            victim: *entity,
+                        },
+                    ));
                 });
-            
+
             if !hit_something {
-                commands.push(((), WantsToMove {
-                    entity: player_entity,
-                    destination: destination
-                }));
+                commands.push((
+                    (),
+                    WantsToMove {
+                        entity: player_entity,
+                        destination: destination,
+                    },
+                ));
             }
         }
-        
+
         *turn_state = TurnState::PlayerTurn;
     }
 }
