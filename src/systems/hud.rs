@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+/// Renders Heads-Up Display with health bar and basic game instructions
 #[system]
 #[read_component(Health)]
 #[read_component(Player)]
