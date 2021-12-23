@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+/// Renders map within camera dimensions
 #[system]
 pub fn map_render(#[resource] map: &Map, #[resource] camera: &Camera) {
     let mut draw_batch = DrawBatch::new();
