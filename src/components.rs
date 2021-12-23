@@ -19,6 +19,12 @@ pub struct MovingRandomly;
 pub struct ChasingPlayer;
 
 #[derive(Copy, Clone, Debug, PartialEq)]
+pub struct Item;
+
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub struct AmuletOfPaxus;
+
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub struct WantsToMove {
     pub entity: Entity,
     pub destination: Point,
