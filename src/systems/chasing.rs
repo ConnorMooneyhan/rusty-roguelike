@@ -5,11 +5,7 @@ use crate::prelude::*;
 #[read_component(ChasingPlayer)]
 #[read_component(Health)]
 #[read_component(Player)]
-pub fn chasing(
-    #[resource] map: &Map,
-    ecs: &SubWorld,
-    commands: &mut CommandBuffer
-) {
+pub fn chasing(#[resource] map: &Map, ecs: &SubWorld, commands: &mut CommandBuffer) {
     let mut movers = <(Entity, &Point, &ChasingPlayer)>::query();
     let mut positions = <(Entity, &Point, &Health)>::query();
     let mut player = <(&Point, &Player)>::query();
@@ -19,13 +15,7 @@ pub fn chasing(
 
     // Defines Dijkstra map with player as starting point
     let search_targets = vec![player_idx];
-    let dijkstra_map = DijkstraMap::new(
-        SCREEN_WIDTH,
-        SCREEN_HEIGHT,
-        &search_targets,
-        map,
-        1024.0
-    );
+    let dijkstra_map = DijkstraMap::new(SCREEN_WIDTH, SCREEN_HEIGHT, &search_targets, map, 1024.0);
 
     movers.iter(ecs).for_each(|(entity, pos, _)| {
         let idx = map_idx(pos.x, pos.y);
@@ -57,7 +47,7 @@ pub fn chasing(
                     }
                     attacked = true;
                 });
-    
+
             if !attacked {
                 commands.push((
                     (),

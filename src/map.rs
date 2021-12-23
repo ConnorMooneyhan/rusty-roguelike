@@ -86,16 +86,12 @@ impl BaseMap for Map {
         }
         if let Some(idx) = self.valid_exit(location, Point::new(0, 1)) {
             exits.push((idx, 1.0))
-        }     
+        }
 
         exits
     }
 
     fn get_pathing_distance(&self, idx1: usize, idx2: usize) -> f32 {
-        DistanceAlg::Pythagoras
-            .distance2d(
-                self.index_to_point2d(idx1),
-                self.index_to_point2d(idx2)
-            )
+        DistanceAlg::Pythagoras.distance2d(self.index_to_point2d(idx1), self.index_to_point2d(idx2))
     }
 }

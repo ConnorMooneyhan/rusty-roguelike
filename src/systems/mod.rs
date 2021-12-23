@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+mod chasing;
 mod combat;
 mod end_turn;
 mod entity_render;
@@ -9,7 +10,6 @@ mod movement;
 mod player_input;
 mod random_move;
 mod tooltips;
-mod chasing;
 
 /// Scheduler for TurnState::AwaitingInput
 pub fn build_input_scheduler() -> Schedule {
