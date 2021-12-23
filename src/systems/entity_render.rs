@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+/// Renders all entities with Point and Render components
 #[system]
 #[read_component(Point)]
 #[read_component(Render)]
