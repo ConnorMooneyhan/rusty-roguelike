@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+/// Executes movement for MovingRandomly entities
 #[system]
 #[read_component(Point)]
 #[read_component(MovingRandomly)]
