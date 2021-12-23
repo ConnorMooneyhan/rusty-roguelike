@@ -30,7 +30,7 @@ pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Poin
             color: ColorPair::new(WHITE, BLACK),
             glyph,
         },
-        MovingRandomly,
+        ChasingPlayer,
         Health {
             current: hp,
             max: hp,
@@ -39,12 +39,12 @@ pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Poin
     ));
 }
 
-/// Returns tuple containing hitpoint count, name, and FontCharType
+/// Returns tuple containing hitpoint count, name, and FontCharType for a goblin character
 fn goblin() -> (i32, String, FontCharType) {
     (1, "Goblin".to_string(), to_cp437('g'))
 }
 
-/// Returns tuple containing hitpoint count, name, and FontCharType
+/// Returns tuple containing hitpoint count, name, and FontCharType for an orc character
 fn orc() -> (i32, String, FontCharType) {
     (2, "Orc".to_string(), to_cp437('o'))
 }
