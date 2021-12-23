@@ -41,18 +41,16 @@ pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Poin
 
 /// Spawns Amulet of Paxus
 pub fn spawn_amulet_of_paxus(ecs: &mut World, pos: Point) {
-    ecs.push(
-        (
-            Item,
-            AmuletOfPaxus,
-            pos,
-            Render {
-                color: ColorPair::new(WHITE, BLACK),
-                glyph: to_cp437('|')
-            },
-            Name("Amulet Of Paxus".to_string())
-        )
-    );
+    ecs.push((
+        Item,
+        AmuletOfPaxus,
+        pos,
+        Render {
+            color: ColorPair::new(WHITE, BLACK),
+            glyph: to_cp437('|'),
+        },
+        Name("Amulet Of Paxus".to_string()),
+    ));
 }
 
 /// Returns tuple containing hitpoint count, name, and FontCharType for a goblin character

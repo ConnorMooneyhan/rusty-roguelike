@@ -19,6 +19,6 @@ pub fn end_turn(ecs: &SubWorld, #[resource] turn_state: &mut TurnState) {
             new_state = TurnState::GameOver;
         }
     });
-    
+
     *turn_state = new_state;
 }
