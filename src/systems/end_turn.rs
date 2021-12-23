@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+/// Changes TurnState based on current TurnState
 #[system]
 pub fn end_turn(#[resource] turn_state: &mut TurnState) {
     let new_state = match turn_state {
