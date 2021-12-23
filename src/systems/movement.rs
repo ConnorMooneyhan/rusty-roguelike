@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+/// Processes WantsToMove requests
 #[system(for_each)] // Runs system once for each entity matching arguments
 #[read_component(Player)]
 pub fn movement(
