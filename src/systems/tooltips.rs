@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+/// Renders any tooltips
 #[system]
 #[read_component(Point)]
 #[read_component(Name)]
