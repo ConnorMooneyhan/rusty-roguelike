@@ -10,10 +10,7 @@ pub fn end_turn(ecs: &SubWorld, #[resource] turn_state: &mut TurnState) {
     let mut player_hp = <(&Health, &Point)>::query().filter(component::<Player>());
     let mut amulet = <&Point>::query().filter(component::<AmuletOfPaxus>());
 
-    let amulet_pos = amulet
-        .iter(ecs)
-        .nth(0)
-        .unwrap();
+    let amulet_pos = amulet.iter(ecs).nth(0).unwrap();
 
     let current_state = turn_state.clone();
     let mut new_state = match current_state {
@@ -27,7 +24,7 @@ pub fn end_turn(ecs: &SubWorld, #[resource] turn_state: &mut TurnState) {
         if hp.current < 1 {
             new_state = TurnState::GameOver;
         }
-        
+
         if pos == amulet_pos {
             new_state = TurnState::Victory;
         }
