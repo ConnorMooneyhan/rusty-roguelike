@@ -11,7 +11,7 @@ pub fn movement(
     #[resource] camera: &mut Camera,
     ecs: &mut SubWorld,
     commands: &mut CommandBuffer,
-) {  
+) {
     // Checks if desired movement destination is valid
     if map.can_enter_tile(want_move.destination) {
         // Schedules movement to desired destination
