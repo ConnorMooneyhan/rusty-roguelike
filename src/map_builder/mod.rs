@@ -1,7 +1,9 @@
 use crate::prelude::*;
 use empty::EmptyArchitect;
+use rooms::RoomsArchitect;
 
 mod empty;
+mod rooms;
 
 trait MapArchitect {
     fn new(&mut self, rng: &mut RandomNumberGenerator) -> MapBuilder;
@@ -41,7 +43,7 @@ impl MapBuilder {
         // mb.amulet_start = mb.find_most_distant();
 
         // mb
-        let mut architect = EmptyArchitect{};
+        let mut architect = RoomsArchitect{};
         architect.new(rng)
     }
 
