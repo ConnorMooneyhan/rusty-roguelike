@@ -1,4 +1,5 @@
 use crate::prelude::*;
+use empty::EmptyArchitect;
 
 mod empty;
 
@@ -25,20 +26,23 @@ pub struct MapBuilder {
 impl MapBuilder {
     /// Constructs new `MapBuilder` for given `RandomNumberGenerator` instance  
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
-        let mut mb = Self {
-            map: Map::new(),
-            rooms: Vec::new(),
-            player_start: Point::zero(),
-            amulet_start: Point::zero(),
-        };
-        mb.fill(TileType::Wall);
-        mb.build_random_rooms(rng);
-        mb.build_corridors(rng);
-        mb.player_start = mb.rooms[0].center();
+        // let mut mb = Self {
+        //     map: Map::new(),
+        //     rooms: Vec::new(),
+        //     monster_spawns: Vec::new(),
+        //     player_start: Point::zero(),
+        //     amulet_start: Point::zero(),
+        // };
+        // mb.fill(TileType::Wall);
+        // mb.build_random_rooms(rng);
+        // mb.build_corridors(rng);
+        // mb.player_start = mb.rooms[0].center();
 
-        mb.amulet_start = mb.find_most_distant();
+        // mb.amulet_start = mb.find_most_distant();
 
-        mb
+        // mb
+        let mut architect = EmptyArchitect{};
+        architect.new(rng)
     }
 
     /// Fills entire dungeon with tiles of type `tile`
