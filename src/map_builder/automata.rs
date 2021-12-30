@@ -35,4 +35,19 @@ impl CellularAutomataArchitect {
 
         neighbors
     }
+
+    fn iteration(&mut self, map: &mut Map) {
+        let mut new_tiles = map.tiles.clone();
+        for y in 1..SCREEN_HEIGHT-1 {
+            for x in 1..SCREEN_WIDTH-1 {
+                let neighbors = self.count_neighbors(x, y, map);
+                let idx = map_idx(x, y);
+                new_tiles[idx] = match neighbors > 4 || neighbors == 0 {
+                    true => TileType::Wall,
+                    false => TileType::Floor,
+                };
+            }
+        }
+        map.tiles = new_tiles;
+    }
 }
