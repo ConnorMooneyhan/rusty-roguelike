@@ -28,22 +28,7 @@ pub struct MapBuilder {
 impl MapBuilder {
     /// Constructs new `MapBuilder` for given `RandomNumberGenerator` instance  
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
-        // let mut mb = Self {
-        //     map: Map::new(),
-        //     rooms: Vec::new(),
-        //     monster_spawns: Vec::new(),
-        //     player_start: Point::zero(),
-        //     amulet_start: Point::zero(),
-        // };
-        // mb.fill(TileType::Wall);
-        // mb.build_random_rooms(rng);
-        // mb.build_corridors(rng);
-        // mb.player_start = mb.rooms[0].center();
-
-        // mb.amulet_start = mb.find_most_distant();
-
-        // mb
-        let mut architect = RoomsArchitect{};
+        let mut architect = RoomsArchitect {};
         architect.new(rng)
     }
 
@@ -52,7 +37,7 @@ impl MapBuilder {
         self.map.tiles.iter_mut().for_each(|t| *t = tile);
     }
 
-    /// Returns most distant point from 
+    /// Returns most distant point from
     fn find_most_distant(&self) -> Point {
         let dijkstra_map = DijkstraMap::new(
             SCREEN_WIDTH,
