@@ -23,7 +23,7 @@ pub fn movement(
             if let Ok(fov) = entry.get_component::<FieldOfView>() {
                 // Adds a new FieldOfView with a blank set of visible tiles and is_dirty set to true
                 commands.add_component(want_move.entity, fov.clone_dirty());
-                
+
                 // Moves camera to the new destination if entry is Player
                 if entry.get_component::<Player>().is_ok() {
                     camera.on_player_move(want_move.destination);
