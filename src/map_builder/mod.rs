@@ -1,9 +1,11 @@
 use crate::prelude::*;
 use empty::EmptyArchitect;
 use rooms::RoomsArchitect;
+use automata::CellularAutomataArchitect;
 
 mod empty;
 mod rooms;
+mod automata;
 
 trait MapArchitect {
     fn new(&mut self, rng: &mut RandomNumberGenerator) -> MapBuilder;
@@ -30,6 +32,16 @@ impl MapBuilder {
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
         let mut architect = RoomsArchitect {};
         architect.new(rng)
+    }
+
+    pub fn create_empty() -> Self {
+        Self {
+            map: Map::new(),
+            rooms: Vec::new(),
+            monster_spawns: Vec::new(),
+            player_start: Point::zero(),
+            amulet_start: Point::zero(),
+        }
     }
 
     /// Fills entire dungeon with tiles of type `tile`
