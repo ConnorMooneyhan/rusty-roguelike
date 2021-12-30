@@ -1,5 +1,7 @@
 use crate::prelude::*;
 
+mod empty;
+
 trait MapArchitect {
     fn new(&mut self, rng: &mut RandomNumberGenerator) -> MapBuilder;
 }
@@ -15,6 +17,7 @@ const NUM_ROOMS: usize = 20;
 pub struct MapBuilder {
     pub map: Map,
     pub rooms: Vec<Rect>,
+    pub monster_spawns: Vec<Point>,
     pub player_start: Point,
     pub amulet_start: Point,
 }
