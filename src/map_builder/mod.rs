@@ -2,6 +2,12 @@ use crate::prelude::*;
 
 const NUM_ROOMS: usize = 20;
 
+/// # Struct
+/// ## Fields
+/// * map: `Map`
+/// * rooms: `Vec<Rect>`
+/// * player_start: `Point`
+/// * amulet_start: `Point`
 pub struct MapBuilder {
     pub map: Map,
     pub rooms: Vec<Rect>,
@@ -23,17 +29,29 @@ impl MapBuilder {
         mb.build_corridors(rng);
         mb.player_start = mb.rooms[0].center();
 
+        mb.amulet_start = mb.find_most_distant();
+
+        mb
+    }
+
+    /// Fills entire dungeon with tiles of type `tile`
+    fn fill(&mut self, tile: TileType) {
+        self.map.tiles.iter_mut().for_each(|t| *t = tile);
+    }
+
+    /// Returns most distant point from 
+    fn find_most_distant(&self) -> Point {
         let dijkstra_map = DijkstraMap::new(
             SCREEN_WIDTH,
             SCREEN_HEIGHT,
-            &vec![mb.map.point2d_to_index(mb.player_start)],
-            &mb.map,
+            &vec![self.map.point2d_to_index(self.player_start)],
+            &self.map,
             1024.0,
         );
         const UNREACHABLE: &f32 = &f32::MAX;
 
         // Gets tile farthest away from player
-        mb.amulet_start = mb.map.index_to_point2d(
+        self.map.index_to_point2d(
             dijkstra_map
                 .map
                 .iter()
@@ -42,14 +60,7 @@ impl MapBuilder {
                 .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
                 .unwrap()
                 .0,
-        );
-
-        mb
-    }
-
-    /// Fills entire dungeon with tiles of type `tile`
-    fn fill(&mut self, tile: TileType) {
-        self.map.tiles.iter_mut().for_each(|t| *t = tile);
+        )
     }
 
     /// Carves rooms out of wall (or whatever else was on the map)
