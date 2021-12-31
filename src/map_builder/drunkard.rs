@@ -40,6 +40,7 @@ impl MapArchitect for DrunkardsWalkArchitect {
                 .enumerate()
                 .filter(|(_, distance)| *distance > &2000.0)
                 .for_each(|(idx, _)| mb.map.tiles[idx] = TileType::Wall);
+            mb.add_boundaries();
             
         }
 

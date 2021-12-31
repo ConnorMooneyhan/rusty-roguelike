@@ -34,9 +34,7 @@ impl MapBuilder {
     /// Constructs new `MapBuilder` for given `RandomNumberGenerator` instance  
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
         let mut architect = DrunkardsWalkArchitect {};
-        let mut mb = architect.new(rng);
-        mb.add_boundaries();
-        mb
+        architect.new(rng)
     }
 
     pub fn create_empty() -> Self {
