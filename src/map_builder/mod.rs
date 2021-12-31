@@ -8,6 +8,7 @@ mod automata;
 mod drunkard;
 mod empty;
 mod rooms;
+mod prefab;
 
 trait MapArchitect {
     fn new(&mut self, rng: &mut RandomNumberGenerator) -> MapBuilder;
@@ -33,8 +34,13 @@ pub struct MapBuilder {
 impl MapBuilder {
     /// Constructs new `MapBuilder` for given `RandomNumberGenerator` instance  
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
-        let mut architect = DrunkardsWalkArchitect {};
-        architect.new(rng)
+        let mut architect: Box<dyn MapArchitect> = match rng.range(0, 3) {
+            0 => Box::new(DrunkardsWalkArchitect{}),
+            1 => Box::new(RoomsArchitect{}),
+            _ => Box::new(CellularAutomataArchitect{}),
+        };
+        let mb = architect.new(rng);
+        mb
     }
 
     pub fn create_empty() -> Self {
