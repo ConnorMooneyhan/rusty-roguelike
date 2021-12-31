@@ -2,6 +2,7 @@ use crate::prelude::*;
 use automata::CellularAutomataArchitect;
 use empty::EmptyArchitect;
 use rooms::RoomsArchitect;
+use drunkard::DrunkardsWalkArchitect;
 
 mod automata;
 mod drunkard;
@@ -32,7 +33,7 @@ pub struct MapBuilder {
 impl MapBuilder {
     /// Constructs new `MapBuilder` for given `RandomNumberGenerator` instance  
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
-        let mut architect = CellularAutomataArchitect {};
+        let mut architect = DrunkardsWalkArchitect {};
         architect.new(rng)
     }
 
@@ -50,7 +51,7 @@ impl MapBuilder {
     fn fill(&mut self, tile: TileType) {
         self.map.tiles.iter_mut().for_each(|t| *t = tile);
     }
-
+    
     /// Returns most distant point from
     fn find_most_distant(&self) -> Point {
         let dijkstra_map = DijkstraMap::new(
@@ -73,6 +74,17 @@ impl MapBuilder {
                 .unwrap()
                 .0,
         )
+    }
+
+    fn add_boundaries(&mut self) {
+        for x in 1..SCREEN_WIDTH {
+            self.map.tiles[map_idx(x, 1)] = TileType::Wall;
+            self.map.tiles[map_idx(x, SCREEN_HEIGHT - 1)] = TileType::Wall;
+        }
+        for y in 1..SCREEN_HEIGHT {
+            self.map.tiles[map_idx(1, y)] = TileType::Wall;
+            self.map.tiles[map_idx(SCREEN_WIDTH - 1, y)] = TileType::Wall;
+        }
     }
 
     /// Carves rooms out of wall (or whatever else was on the map)
