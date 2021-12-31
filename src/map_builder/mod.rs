@@ -3,6 +3,7 @@ use automata::CellularAutomataArchitect;
 use empty::EmptyArchitect;
 use rooms::RoomsArchitect;
 use drunkard::DrunkardsWalkArchitect;
+use prefab::apply_prefab;
 
 mod automata;
 mod drunkard;
@@ -39,7 +40,8 @@ impl MapBuilder {
             1 => Box::new(RoomsArchitect{}),
             _ => Box::new(CellularAutomataArchitect{}),
         };
-        let mb = architect.new(rng);
+        let mut mb = architect.new(rng);
+        apply_prefab(&mut mb, rng);
         mb
     }
 
