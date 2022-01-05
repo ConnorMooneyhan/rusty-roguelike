@@ -33,6 +33,9 @@ pub struct ProvidesHealing {
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct ProvidesDungeonMap;
 
+#[derive(Clone, PartialEq)]
+pub struct Carried(pub Entity);
+
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct WantsToMove {
     pub entity: Entity,
