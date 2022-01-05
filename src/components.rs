@@ -26,6 +26,11 @@ pub struct Item;
 pub struct AmuletOfPaxus;
 
 #[derive(Copy, Clone, Debug, PartialEq)]
+pub struct ProvidesHealing {
+    pub amount: i32,
+}
+
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub struct WantsToMove {
     pub entity: Entity,
     pub destination: Point,

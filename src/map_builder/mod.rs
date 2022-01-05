@@ -1,6 +1,6 @@
 use crate::prelude::*;
 use automata::CellularAutomataArchitect;
-use empty::EmptyArchitect;
+// use empty::EmptyArchitect;
 use rooms::RoomsArchitect;
 use drunkard::DrunkardsWalkArchitect;
 use prefab::apply_prefab;
