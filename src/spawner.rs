@@ -67,32 +67,30 @@ pub fn spawn_amulet_of_paxus(ecs: &mut World, pos: Point) {
 
 /// Spawns Healing Potion
 pub fn spawn_healing_potion(ecs: &mut World, pos: Point) {
-    ecs.push(
-        (Item,
+    ecs.push((
+        Item,
         pos,
         Render {
             color: ColorPair::new(WHITE, BLACK),
             glyph: to_cp437('!'),
         },
         Name("Healing Potion".to_string()),
-        ProvidesHealing{ amount: 6 })
-    );
+        ProvidesHealing { amount: 6 },
+    ));
 }
 
 /// Spawns Dungeon Map
 pub fn spawn_dungeon_map(ecs: &mut World, pos: Point) {
-    ecs.push(
-        (
-            Item,
-            pos,
-            Render {
-                color: ColorPair::new(WHITE, BLACK),
-                glyph: to_cp437('{'),
-            },
-            Name("Dungeon Map".to_string()),
-            ProvidesDungeonMap,
-        )
-    );
+    ecs.push((
+        Item,
+        pos,
+        Render {
+            color: ColorPair::new(WHITE, BLACK),
+            glyph: to_cp437('{'),
+        },
+        Name("Dungeon Map".to_string()),
+        ProvidesDungeonMap,
+    ));
 }
 
 /// Returns tuple containing hitpoint count, name, and FontCharType for a goblin character

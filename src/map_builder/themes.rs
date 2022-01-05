@@ -5,7 +5,7 @@ pub struct DungeonTheme {}
 
 impl DungeonTheme {
     pub fn new() -> Box<dyn MapTheme> {
-        Box::new(Self{})
+        Box::new(Self {})
     }
 }
 
@@ -23,7 +23,7 @@ pub struct ForestTheme {}
 
 impl ForestTheme {
     pub fn new() -> Box<dyn MapTheme> {
-        Box::new(Self{})
+        Box::new(Self {})
     }
 }
 

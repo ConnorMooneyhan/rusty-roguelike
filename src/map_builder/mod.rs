@@ -1,16 +1,16 @@
 use crate::prelude::*;
 use automata::CellularAutomataArchitect;
 // use empty::EmptyArchitect;
-use rooms::RoomsArchitect;
 use drunkard::DrunkardsWalkArchitect;
 use prefab::apply_prefab;
+use rooms::RoomsArchitect;
 use themes::*;
 
 mod automata;
 mod drunkard;
 mod empty;
-mod rooms;
 mod prefab;
+mod rooms;
 mod themes;
 
 trait MapArchitect {
@@ -43,9 +43,9 @@ impl MapBuilder {
     /// Constructs new `MapBuilder` for given `RandomNumberGenerator` instance  
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
         let mut architect: Box<dyn MapArchitect> = match rng.range(0, 3) {
-            0 => Box::new(DrunkardsWalkArchitect{}),
-            1 => Box::new(RoomsArchitect{}),
-            _ => Box::new(CellularAutomataArchitect{}),
+            0 => Box::new(DrunkardsWalkArchitect {}),
+            1 => Box::new(RoomsArchitect {}),
+            _ => Box::new(CellularAutomataArchitect {}),
         };
         let mut mb = architect.new(rng);
         apply_prefab(&mut mb, rng);
@@ -54,7 +54,7 @@ impl MapBuilder {
             0 => DungeonTheme::new(),
             _ => ForestTheme::new(),
         };
-        
+
         mb
     }
 
@@ -73,7 +73,7 @@ impl MapBuilder {
     fn fill(&mut self, tile: TileType) {
         self.map.tiles.iter_mut().for_each(|t| *t = tile);
     }
-    
+
     /// Returns most distant point from
     fn find_most_distant(&self) -> Point {
         let dijkstra_map = DijkstraMap::new(
