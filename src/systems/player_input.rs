@@ -36,7 +36,7 @@ pub fn player_input(
                         commands.add_component(*entity, Carried(player));
                     });
                 Point::zero()
-            },
+            }
             VirtualKeyCode::Key1 => use_item(0, ecs, commands),
             VirtualKeyCode::Key2 => use_item(1, ecs, commands),
             VirtualKeyCode::Key3 => use_item(2, ecs, commands),
@@ -85,16 +85,6 @@ pub fn player_input(
             }
         }
 
-        if !did_something {
-            if let Ok(mut health) = ecs
-                .entry_mut(player_entity)
-                .unwrap()
-                .get_component_mut::<Health>()
-            {
-                health.current = i32::min(health.max, health.current + 1);
-            }
-        }
-
         *turn_state = TurnState::PlayerTurn;
     }
 }
@@ -111,13 +101,13 @@ fn use_item(n: usize, ecs: &mut SubWorld, commands: &mut CommandBuffer) -> Point
         .filter(|(item_count, (_, _, _))| *item_count == n)
         .find_map(|(_, (item_entity, _, _))| Some(*item_entity));
     if let Some(item_entity) = item_entity {
-        commands.push(
-            ((),
+        commands.push((
+            (),
             ActivateItem {
                 used_by: player_entity,
                 item: item_entity,
-            })
-        );
+            },
+        ));
     }
     Point::zero()
 }
