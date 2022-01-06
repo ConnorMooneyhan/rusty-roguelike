@@ -49,6 +49,12 @@ pub struct WantsToAttack {
 }
 
 #[derive(Copy, Clone, Debug, PartialEq)]
+pub struct ActivateItem {
+    pub used_by: Entity,
+    pub item: Entity,
+}
+
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub struct Health {
     pub current: i32,
     pub max: i32,
