@@ -11,6 +11,7 @@ mod movement;
 mod player_input;
 mod random_move;
 mod tooltips;
+mod use_item;
 
 /// Scheduler for TurnState::AwaitingInput
 pub fn build_input_scheduler() -> Schedule {
