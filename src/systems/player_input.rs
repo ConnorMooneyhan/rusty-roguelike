@@ -28,14 +28,15 @@ pub fn player_input(
                     .find_map(|(entity, pos)| Some((*entity, *pos)))
                     .unwrap();
                 let mut items = <(Entity, &Point)>::query().filter(component::<Item>());
-                items.iter(ecs)
+                items
+                    .iter(ecs)
                     .filter(|(_entity, &item_pos)| item_pos == player_pos)
                     .for_each(|(entity, _item_pos)| {
                         commands.remove_component::<Point>(*entity);
                         commands.add_component(*entity, Carried(player));
                     });
                 Point::zero()
-            },
+            }
             _ => Point::zero(),
         };
 
