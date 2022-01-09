@@ -35,10 +35,9 @@ impl Map {
 
     /// Determines if a player can enter a given tile
     pub fn can_enter_tile(&self, point: Point) -> bool {
-        self.in_bounds(point) && (
-            self.tiles[map_idx(point.x, point.y)] == TileType::Floor ||
-            self.tiles[map_idx(point.x, point.y)] == TileType::Exit
-        )
+        self.in_bounds(point)
+            && (self.tiles[map_idx(point.x, point.y)] == TileType::Floor
+                || self.tiles[map_idx(point.x, point.y)] == TileType::Exit)
     }
 
     /// Returns index if in bounds
