@@ -37,9 +37,9 @@ pub fn hud(ecs: &SubWorld) {
         .find_map(|(entity, player)| Some((*entity, player.map_level)))
         .unwrap();
     draw_batch.print_color_right(
-        Point::new(SCREEN_WIDTH*2, 1),
-        format!("Dungeon Level: {}", map_level+1),
-        ColorPair::new(YELLOW, BLACK)
+        Point::new(SCREEN_WIDTH * 2, 1),
+        format!("Dungeon Level: {}", map_level + 1),
+        ColorPair::new(YELLOW, BLACK),
     );
     let mut item_query = <(&Item, &Name, &Carried)>::query();
     let mut y = 3;
